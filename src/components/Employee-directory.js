@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import NavTabs from "./NavTabs";
+import NavTabs from "./JumbTab";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
+import JumbTab from "./JumbTab";
 
 class Portfolio extends Component {
   state = {
@@ -29,11 +30,8 @@ class Portfolio extends Component {
   render() {
     return (
       <div>
-        <NavTabs
-          currentPage={this.state.currentPage}
-          handlePageChange={this.handlePageChange}
-        />
-        {this.renderPage()}
+        <div className="jumbotron text-center bg-primary"><h1>Employee Directory</h1></div>
+        <p>hello</p>
       </div>
     );
   }

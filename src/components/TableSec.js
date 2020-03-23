@@ -2,7 +2,6 @@ import React from "react";
 
 // Whenever we try to render an array containing JSX, React knows to render each JSX element separately
 function TableSec(props) {
-    console.log("props: ", props)
     return (
         <div className="container">
             <table className="table">

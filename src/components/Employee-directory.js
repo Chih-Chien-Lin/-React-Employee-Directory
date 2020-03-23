@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import JumboSec from "./JumboSec"
 import TableSec from "./TableSec"
+import SearchForm from "./SearchForm"
 
 
 var employees = [
@@ -48,17 +49,19 @@ var employees = [
   },
 ];
 var employeeList = [];
+var searchedEmployee = "";
+var toBeSearched = "";
 
 employees.map(each => (
   employeeList.push(each.name)
 ));
 
-// const match = (s) => {
-//   const p = Array.from(s).reduce((a, v, i) => `${a}[^${s.substr(i)}]*?${v}`, '');
-//   const re = RegExp(p);
+const match = (s) => {
+  const p = Array.from(s).reduce((a, v, i) => `${a}[^${s.substr(i)}]*?${v}`, '');
+  const re = RegExp(p);
 
-//   return employeeList.filter(v => v.match(re));
-// };
+  return employeeList.filter(v => v.match(re));
+};
 
 class EmployeeDirect extends Component {
   state = {
@@ -67,24 +70,26 @@ class EmployeeDirect extends Component {
 
   handleInputChange = event => {
     // Getting the value and name of the input which triggered the change
-    console.log("come to here")
-    const {value} = event.target;
-    console.log("get value: ",value)
+    const { value } = event.target;
+    toBeSearched = employees.filter(name => name.name.match(value));
+    console.log("tobesearched: ", toBeSearched)
     // Updating the input's state
     this.setState({
       searched: value
     });
-    console.log("change state: ",this.state)
   };
+
   handleFormSubmit = event => {
     // Preventing the default behavior of the form submit (which is to refresh the page)
     event.preventDefault();
-
     this.setState({
       searched: ""
     });
   };
 
+  filterFormSearch = event => {
+
+  }
 
   render() {
     return (
@@ -93,17 +98,24 @@ class EmployeeDirect extends Component {
         <p className="text-center">
           Hello, you searched: {this.state.searched}
         </p>
-        <form className="form offset-md-3">
-          <input
-            value={this.state.searched}
-            onChange={this.handleInputChange}
-            type="text"
-            placeholder="Search"
-          />
-          <button onClick={this.handleFormSubmit}>Submit</button>
-        </form>
+        <SearchForm
+          search={this.state.searched}
+          handleFormSubmit={this.handleFormSubmit}
+          handleInputChange={this.handleInputChange}
+        />
         <br></br><br></br>
-        <TableSec employees={employees} />
+
+        {this.state.searched ? (
+          <TableSec
+            employees={toBeSearched}
+          />
+        ) : (
+            <TableSec
+              employees={employees}
+            />
+          )}
+
+        {/* <TableSec employees={employees} /> */}
       </div>
     );
   }

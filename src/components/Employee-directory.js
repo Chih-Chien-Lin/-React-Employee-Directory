@@ -49,19 +49,19 @@ var employees = [
   },
 ];
 var employeeList = [];
-var searchedEmployee = "";
 var toBeSearched = "";
 
 employees.map(each => (
   employeeList.push(each.name)
 ));
 
-const match = (s) => {
-  const p = Array.from(s).reduce((a, v, i) => `${a}[^${s.substr(i)}]*?${v}`, '');
-  const re = RegExp(p);
+// Match function!!
+// const match = (s) => {
+//   const p = Array.from(s).reduce((a, v, i) => `${a}[^${s.substr(i)}]*?${v}`, '');
+//   const re = RegExp(p);
 
-  return employeeList.filter(v => v.match(re));
-};
+//   return employeeList.filter(v => v.match(re));
+// };
 
 class EmployeeDirect extends Component {
   state = {
@@ -71,7 +71,7 @@ class EmployeeDirect extends Component {
   handleInputChange = event => {
     // Getting the value and name of the input which triggered the change
     const { value } = event.target;
-    toBeSearched = employees.filter(name => name.name.match(value));
+    toBeSearched = employees.filter(employee => employee.name.match(value));
     console.log("tobesearched: ", toBeSearched)
     // Updating the input's state
     this.setState({
@@ -87,17 +87,13 @@ class EmployeeDirect extends Component {
     });
   };
 
-  filterFormSearch = event => {
 
-  }
 
   render() {
     return (
       <div>
         <JumboSec />
-        <p className="text-center">
-          Hello, you searched: {this.state.searched}
-        </p>
+
         <SearchForm
           search={this.state.searched}
           handleFormSubmit={this.handleFormSubmit}
@@ -115,7 +111,6 @@ class EmployeeDirect extends Component {
             />
           )}
 
-        {/* <TableSec employees={employees} /> */}
       </div>
     );
   }

@@ -7,7 +7,7 @@ function SearchForm(props) {
                 value={props.search}
                 onChange={props.handleInputChange}
                 type="text"
-                placeholder="Search"
+                placeholder="Search name"
             />
             <button onClick={props.handleFormSubmit}>Submit</button>
         </form>

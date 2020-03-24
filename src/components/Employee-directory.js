@@ -53,7 +53,7 @@ const employees = [
 
 
 var employeeList = [];
-var toBeSearched;
+// var toBeSearched;
 employees.map(each => (
   employeeList.push(each.name)
 ));
@@ -69,6 +69,7 @@ employees.map(each => (
 class EmployeeDirect extends Component {
   state = {
     searched: "",
+    toBeSearched: [],
     id: "false",
     name: "false",
     email: "false",
@@ -79,12 +80,13 @@ class EmployeeDirect extends Component {
   handleInputChange = event => {
     // Getting the value and name of the input which triggered the change
     const { value } = event.target;
-    toBeSearched = employees.filter(employee => employee.name.match(value));
+    // toBeSearched = employees.filter(employee => employee.name.match(value));
     console.log("new employees: ",employees)
-    console.log("tobesearched: ", toBeSearched)
+    // console.log("tobesearched: ", toBeSearched)
     // Updating the input's state
     this.setState({
-      searched: value
+      searched: value,
+      toBeSearched : employees.filter(employee => employee.name.match(value));
     });
   };
 
